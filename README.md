@@ -24,6 +24,6 @@ aws cloudformation package \
 ````
 aws cloudformation deploy \
 --template-file template-out.yaml \
---stack-name wallet \
+--stack-name wallet-ms-go \
 --capabilities CAPABILITY_IAM
 ````

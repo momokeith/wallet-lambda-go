@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   version: "2016-12-20T18:27:47Z"
-  title: "wallet-ms"
+  title: "wallet-ms-go"
 schemes:
  - "https"
 paths:

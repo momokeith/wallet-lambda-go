@@ -1,7 +1,16 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Handle wallet operations
-
+Parameters:
+  DBName:
+    Type : 'AWS::SSM::Parameter::Value<String>'
+    Default: WalletDBName
+  DBMasterUserName:
+    Type : 'AWS::SSM::Parameter::Value<String>'
+    Default: WalletDBMasterUserName
+  DBMasterPassword:
+    Type : 'AWS::SSM::Parameter::Value<String>'
+    Default: WalletDBMasterPassword
 Resources:
   ListFunction:
     Type: AWS::Serverless::Function
@@ -16,7 +25,14 @@ Resources:
             RestApiId: !Ref ApiGatewayApi
             Path: /wallet
             Method: GET
-
+      Environment:
+        Variables:
+          DB_ENDPOINT_ADDRESS: !GetAtt WalletDB.Endpoint.Address
+          DB_PORT: !GetAtt WalletDB.Endpoint.Port
+          DB_NAME: !Ref DBName
+          DB_USERNAME: !Ref DBMasterUserName
+          DB_PASSWORD: !Ref DBMasterPassword
+          DB_DRIVER: mysql
   ApiGatewayApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -24,3 +40,23 @@ Resources:
       StageName: v1
       Variables:
         ListFunctionName: !Ref ListFunction
+
+  WalletDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: !Ref DBName
+      DBSecurityGroups:
+      - !Ref DbSecurityByEC2SecurityGroup
+      AllocatedStorage: '5'
+      DBInstanceClass: db.t2.micro
+      Engine: MySQL
+      MasterUsername: !Ref DBMasterUserName
+      MasterUserPassword: !Ref DBMasterPassword
+    DeletionPolicy: Snapshot
+
+  DbSecurityByEC2SecurityGroup:
+    Type: "AWS::RDS::DBSecurityGroup"
+    Properties:
+      GroupDescription: "Ingress for Amazon EC2 security group"
+      DBSecurityGroupIngress:
+        - CIDRIP: "0.0.0.0/0"
