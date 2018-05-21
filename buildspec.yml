@@ -2,6 +2,10 @@ version: 0.1
 phases:
   install:
     commands:
+      - go get github.com/aws/aws-lambda-go/events
+      - go get github.com/aws/aws-lambda-go/lambda
+      - go get github.com/jinzhu/gorm/dialects/mysql
+      - go install
       - GOOS=linux go build -o main
       - aws cloudformation package --template-file template.yaml --s3-bucket wallet.lambda
                                    --output-template-file NewSamTemplate.yaml
