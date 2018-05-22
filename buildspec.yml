@@ -1,4 +1,7 @@
 version: 0.1
+env:
+  variables:
+    PACKAGE: "wallet-lambda-go"
 phases:
   install:
     commands:
@@ -7,7 +10,7 @@ phases:
       - go get github.com/jinzhu/gorm/dialects/mysql
   build:
     commands:
-      - go build -o main
+      - cd ${CODEBUILD_SRC_DIR}/${PACKAGE} && go build -o main
 
   post_build:
     commands:
