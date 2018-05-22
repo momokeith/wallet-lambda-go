@@ -5,7 +5,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-lambda-go/events"
      _ "github.com/jinzhu/gorm/dialects/mysql"
-	"wallet-lambda-go/domain/wallet"
+	"wallet-lambda-go/wallet"
 )
 
 
