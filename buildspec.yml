@@ -12,8 +12,6 @@ phases:
     commands:
       - pwd
       - ls -la
-      - ls -la wallet-lambda-go
-      - ls -la wallet-lambda-go/wallet
       - go build -o main
 
   post_build:
