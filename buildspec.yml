@@ -10,7 +10,8 @@ phases:
       - go get github.com/jinzhu/gorm/dialects/mysql
   build:
     commands:
-      - cd ${CODEBUILD_SRC_DIR}/${PACKAGE} && go build -o main
+      - pwd
+      - go build -o main
 
   post_build:
     commands:
