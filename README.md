@@ -35,7 +35,11 @@ sam local invoke "MigrateDBFunction" -e event.json
  ```
 
 # Invoking function with event via stdin
-$ echo '{"message": "Hey, are you there?" }' | sam local invoke "MigrateDBFunction"
+```
+echo '{"message": "Hey, are you there?" }' | sam local invoke "MigrateDBFunction"
+ ```
 
 # For more options
-$ sam local invoke --help
+```
+sam local invoke --help
+ ```
