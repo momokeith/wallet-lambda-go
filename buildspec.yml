@@ -11,8 +11,6 @@ phases:
       - go get github.com/jinzhu/inflection
   build:
     commands:
-      - pwd
-      - ls -la
       - go build -o main
 
   post_build:

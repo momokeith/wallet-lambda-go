@@ -27,3 +27,15 @@ aws cloudformation deploy \
 --stack-name wallet-ms-go \
 --capabilities CAPABILITY_IAM
 ````
+
+# Invoking function with event file
+```
+GOOS=linux go build -o dbmigrate.go
+sam local invoke "MigrateDBFunction" -e event.json
+ ```
+
+# Invoking function with event via stdin
+$ echo '{"message": "Hey, are you there?" }' | sam local invoke "MigrateDBFunction"
+
+# For more options
+$ sam local invoke --help
