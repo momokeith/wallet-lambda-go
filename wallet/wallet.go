@@ -2,7 +2,8 @@ package wallet
 
 import (
 	"encoding/json"
-	"../rds"
+
+	"wallet-lambda-go/rds"
 )
 
 type Wallet struct {

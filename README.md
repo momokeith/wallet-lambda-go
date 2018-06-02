@@ -31,12 +31,12 @@ aws cloudformation deploy \
 # Invoking function with event file
 ```
 GOOS=linux go build -o dbmigrate.go
-sam local invoke "MigrateDBFunction" -e event.json
+sam local invoke "MigrateDBFunction" -e event.json --env-vars configuration.json
  ```
 
 # Invoking function with event via stdin
 ```
-echo '{"message": "Hey, are you there?" }' | sam local invoke "MigrateDBFunction"
+echo '{"message": "Hey, are you there?" }' | sam local invoke "MigrateDBFunction" --env-vars configuration.json
  ```
 
 # For more options
