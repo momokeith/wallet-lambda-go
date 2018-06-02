@@ -5,15 +5,21 @@ env:
 phases:
   install:
     commands:
+      - echo CODEBUILD_SRC_DIR - $CODEBUILD_SRC_DIR
+      - echo GOPATH - $GOPATH
+      - echo Create dir in GOPATH for sources
       - mkdir -p ${GOPATH}/src/${PACKAGE}
+      - echo Copy source files into GOPATH
+      - echo cp -a ${CODEBUILD_SRC_DIR}/.  ${GOPATH}/src/${PACKAGE}
       - cp -a ${CODEBUILD_SRC_DIR}/.  ${GOPATH}/src/${PACKAGE}
+      - cd ${GOPATH}/src/${PACKAGE} && go get ./...
       - go get github.com/aws/aws-lambda-go/events
       - go get github.com/aws/aws-lambda-go/lambda
       - go get github.com/jinzhu/gorm/dialects/mysql
       - go get github.com/jinzhu/inflection
   build:
     commands:
-      - go build -o main
+      - cd ${GOPATH}/src/${PACKAGE} && go build -o ${CODEBUILD_SRC_DIR}/main
 
   post_build:
     commands:
