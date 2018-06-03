@@ -5,14 +5,16 @@ env:
 phases:
   install:
     commands:
-      - go get ./...
-#      - go get github.com/aws/aws-lambda-go/events
-#      - go get github.com/aws/aws-lambda-go/lambda
-#      - go get github.com/jinzhu/gorm/dialects/mysql
-#      - go get github.com/jinzhu/inflection
+      - mkdir -p "/go/src/$(dirname ${PACKAGE})"
+      - ln -s "${CODEBUILD_SRC_DIR}" "/go/src/${PACKAGE}"
+
+  pre_build:
+    commands:
+      - go get -t ./...
+
   build:
     commands:
-      - go build main.go
+      - go build -o main
 
   post_build:
     commands:
