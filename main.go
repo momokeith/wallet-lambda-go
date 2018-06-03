@@ -5,7 +5,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-lambda-go/events"
      _ "github.com/jinzhu/gorm/dialects/mysql"
-	"wallet-lambda-go/wallet"
+	"github.com/momokeith/wallet-lambda-go/wallet"
 )
 
 func handleRequest(context context.Context,
