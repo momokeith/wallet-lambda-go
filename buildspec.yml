@@ -10,8 +10,7 @@ phases:
 
   pre_build:
     commands:
-      - cd "/go/src/wallet-lambda-go"
-      - go get -t ./...
+      - cd "/go/src/wallet-lambda-go" && go get -t ./...
 
   build:
     commands:
