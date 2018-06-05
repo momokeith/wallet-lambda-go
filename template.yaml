@@ -40,24 +40,3 @@ Resources:
       StageName: v1
       Variables:
         ListFunctionName: !Ref ListFunction
-
-  WalletDB:
-    Type: AWS::RDS::DBInstance
-    Properties:
-      DBName: !Ref DBName
-      DBSecurityGroups:
-      - !Ref DbSecurityByEC2SecurityGroup
-      AllocatedStorage: '5'
-      DBInstanceClass: db.t2.micro
-      Engine: MySQL
-      MasterUsername: !Ref DBMasterUserName
-      MasterUserPassword: !Ref DBMasterPassword
-      DBInstanceIdentifier: WalletDB
-    DeletionPolicy: Snapshot
-
-  DbSecurityByEC2SecurityGroup:
-    Type: "AWS::RDS::DBSecurityGroup"
-    Properties:
-      GroupDescription: "Ingress for Amazon EC2 security group"
-      DBSecurityGroupIngress:
-        - CIDRIP: "0.0.0.0/0"
