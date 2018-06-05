@@ -52,10 +52,7 @@ Resources:
       Engine: MySQL
       MasterUsername: !Ref DBMasterUserName
       MasterUserPassword: !Ref DBMasterPassword
-      Tags:
-        -
-          Key: "Name"
-          Value: "walletDB"
+      DBInstanceIdentifier: WalletDB
     DeletionPolicy: Snapshot
 
   DbSecurityByEC2SecurityGroup:
