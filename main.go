@@ -14,7 +14,7 @@ func handleRequest(context context.Context,
 	wallets := wallet.List()
 
 	return events.APIGatewayProxyResponse{
-		Body: wallets.Json(),
+		Body:	 wallets.Json(),
 		StatusCode: 200,
 	}, nil
 }
